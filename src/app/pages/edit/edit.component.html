@@ -1,0 +1,24 @@
+<div *ngIf="(product$ | async) as product">
+  <h1 class="my-5">Edit product</h1>
+  <form #productForm="ngForm" (ngSubmit)="onUpdate(productForm, product)">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="" class="form-control"
+        [(ngModel)]="product.name" required aria-describedby="helpId">
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="text" name="price" id="" class="form-control"
+        [(ngModel)]="product.price" required aria-describedby="helpId">
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <input type="text" name="category" id="" class="form-control"
+        [(ngModel)]="product.category" required aria-describedby="helpId">
+    </div>
+
+    <button class="btn btn-primary btn-block my-5" type="submit">
+      <i class="fa fa-save"></i>
+    </button>
+  </form>
+</div>
