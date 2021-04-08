@@ -15,12 +15,18 @@ export class ListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.productService.getAll();
+  }
+
+  onDelete(product: Product): void {
+    if (window.confirm('Delete this quiz?')) {
+      this.productService.remove(product).subscribe(
+        () => this.products$ = this.productService.getAll()
+      )
+    }
   }
 
 }

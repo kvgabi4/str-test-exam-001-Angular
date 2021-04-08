@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Product } from '../model/product';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Product } from '../model/product';
 export class ProductService {
 
   apiUrl: string = 'https://nettuts.hu/jms/kvgabi4/products';
-  //list$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  // apiUrl: string = 'http://localhost:3000/products';
 
   constructor(
     private http: HttpClient,
@@ -18,7 +19,7 @@ export class ProductService {
   // getAll(): void {
   //   this.http.get<Product[]>(this.apiUrl).subscribe(
   //     list => this.list$.next(list),
-  //     err => console.error(err)
+  //     // err => console.error(err)
   //     )
   //   }
 
@@ -34,12 +35,17 @@ export class ProductService {
     return this.http.post<Product>(this.apiUrl, product)
     }
 
+  // create(product: Product): void {
+  //   this.http.post<Product>(this.apiUrl, product).subscribe(
+  //     () => this.getAll())
+  //   }
+
   update(product: Product): Observable<Product> {
     return this.http.patch<Product>(`${this.apiUrl}/${product.id}`, product)
     }
 
   remove(product: Product): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${product.id}`)
+    return this.http.delete<Product>(`${this.apiUrl}/${product.id}`)
     }
 
 }
